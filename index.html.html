@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+	<style>
+		*{
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+<body>
+
+<div class="mainWrap">
+	<div class="checkWrap">
+
+		<input type="checkbox" class="checkk" data-id="123456" data-quantity="2" id="vehicle1" name="vehicle1" value="Bike">
+		<label for="vehicle1"> I have a bike</label><br>
+		<input type="checkbox" class="checkk" data-id="234567" data-quantity="3" id="vehicle2" name="vehicle2" value="Car">
+		<label for="vehicle2"> I have a car</label><br>
+		<input type="checkbox" class="checkk" data-id="345678" data-quantity="6" id="vehicle3" name="vehicle3" value="Boat">
+		<label for="vehicle3"> I have a boat</label><br>
+
+	</div>
+
+	<button class="clickMe">CLICK</button>
+
+	<div class="text"></div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		let mainArr = [];
+
+		$(".checkk").each(function(){
+			$(this).change(function(){
+				if($(this).is(":checked")){
+					mainArr.push(
+					  {mainID: $(this).attr('data-id'), mainQuan: $(this).attr('data-quantity')}
+					);
+					//console.log(mainArr);
+				}else{
+					var removeArrayValue = $(this).val();
+					mainArr.splice($.inArray(removeArrayValue, mainArr), 1);
+					//console.log(mainArr);
+				}
+			})
+		});
+
+		let newArray = [];
+		let i = 0;
+
+		$(".clickMe").click(function(){
+			if(mainArr.length >= 1){
+
+				$(mainArr).each(function(e, f){
+					newArray[i] = [f.mainID, f.mainQuan];
+					i++;
+				})
+
+				$(newArray).each(function(g, h){
+					console.log(h[0], h[1])
+				});
+
+			}else if(mainArr.length == 0){
+				console.log("No value");
+			}
+		});
+	});
+</script>
+
+</body>
+</html>
